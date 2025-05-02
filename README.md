@@ -40,14 +40,15 @@ $$
 
 As an example, the ReLU is smoothed as an attempt to prevent dying ReLU-neurons. The motivation for parametrising it with a smooth interval is twofold; altering the shape of the passing of information in the form of learnt parameters as well as it potentially being a parameter itself of which the output is a function. 
 
-Further, another Adaptive ReLU-variant is studied: $
+Further, another Adaptive ReLU-variant is studied: 
+$$
  Swish(x) =
   \begin{cases}
  max(0,x) & \text{as $\alpha \xrightarrow{} \infty$} \\
   \frac{x}{1+e^{-\alpha x}} & \text{otherwise}.
-  \end{cases}$ 
+  \end{cases}$$
 
   For each Adaptive Activation, the additional variables ($\varepsilon$ and $\alpha$) are updated with each training iteration similarly to the other learned parameters by integrating the respective derivatives (wrt to the variables) into the backpropagation architecture of the SHLP networks. On the Feedforward Network, adaptivity is implemented onto the hidden-layer ReLU-neurons, while on the Convolutional Model, this is done on the Convolutional ReLU layer. For the LSTM, the Sigmoid and Tanh functions are adapted to increase the efficacy of the Forget gate and the capacity for Long-term memory. 
 
-$$Ad-\sigma (x) = \dfrac{1}{1+e^{-\beta x}}                                  Ad-tanh (x) = \dfrac{e^{\beta x} - e^{-\beta x}}{e^{\beta x}+e^{-\beta x}}$$
+$$Ad-\sigma (x) = \dfrac{1}{1+e^{-\beta x}}        \qquad          Ad-tanh (x) = \dfrac{e^{\beta x} - e^{-\beta x}}{e^{\beta x}+e^{-\beta x}}$$
 
