@@ -10,6 +10,6 @@ Somewhat of a misnomer, the Single Hidden-Layer Perceptron (SHLP) doesn't really
 
 This is the most basic form of the SHLP considered. The binary classification problem on planar data provides context to train the following architecture
 
-$$\hat{y}(\bm{x}) = \sigma(W_2 \;\text{ReLU}(W_1 \; \bm{x} + b_1) + b_2) $$
+$$\hat{y}(\bm{x}) = \sigma(W_2 \;\text{ReLU}(W_1 \; {x} + b_1) + b_2) $$
 
 where the typical ReLU and Sigmoid functions are implemented on the hidden and output layers respectively.  
