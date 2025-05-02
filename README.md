@@ -41,6 +41,7 @@ $$
 As an example, the ReLU is smoothed as an attempt to prevent dying ReLU-neurons. The motivation for parametrising it with a smooth interval is twofold; altering the shape of the passing of information in the form of learnt parameters as well as it potentially being a parameter itself of which the output is a function. 
 
 Further, another Adaptive ReLU-variant is studied: 
+
 $$
  Swish(x) =
   \begin{cases}
@@ -51,4 +52,23 @@ $$
   For each Adaptive Activation, the additional variables ($\varepsilon$ and $\alpha$) are updated with each training iteration similarly to the other learned parameters by integrating the respective derivatives (wrt to the variables) into the backpropagation architecture of the SHLP networks. On the Feedforward Network, adaptivity is implemented onto the hidden-layer ReLU-neurons, while on the Convolutional Model, this is done on the Convolutional ReLU layer. For the LSTM, the Sigmoid and Tanh functions are adapted to increase the efficacy of the Forget gate and the capacity for Long-term memory. 
 
 $$Ad-\sigma (x) = \dfrac{1}{1+e^{-\beta x}}        \qquad          Ad-tanh (x) = \dfrac{e^{\beta x} - e^{-\beta x}}{e^{\beta x}+e^{-\beta x}}$$
+
+Correctness of the methods are validated using Gradient-Checking and diagrams of the loss-landscapes. 
+
+![LL2](https://github.com/user-attachments/assets/33620230-590f-4541-99f0-6f68d0a4cbcf)
+
+https://github.com/user-attachments/assets/977dc0f4-8b17-4a49-9a94-4cc0f9b841df
+
+# Results and Discussion
+
+Empirical numerical experiments are carried out to evaluate the performance of the Adaptive-method. Results convincingly demonstrate that both accuracy on the training set and generalization on the testing set are improved across all datasets and architectures. However, more interesting are the mechanisms that cause this stark improvement. 
+
+![opti_spiral](https://github.com/user-attachments/assets/40e700f3-de33-4859-8c08-1006120f5140)
+
+Observing the effects of the Adaptive FNN on binary planar spiral data, we can isolate a few patterns. The Adaptive ReLU-neurons in the hidden layer (2nd and 4th diagrams), are able to almost always achieve a greater accuracy and validation compared to the conventional ReLU-neurons (1st and 3rd diagrams). Additionally, given equal initializations of parameters and deterministic training, the Adaptive-method allows escaping of shallow, non-optimal minima (1st and 2nd diagrams), while across all optimization methods, allows for better generalization and faster convergence (3rd and 4th diagrams). These patterns are due to the additional Activation parameter allowing the Weights and Biases to more efficiently move across "better" optimization paths. This is seen when studying the isolated training-trajectories of individual parameters and the loss-landscapes associated. 
+
+<img width="511" alt="convfeatures" src="https://github.com/user-attachments/assets/9e05a851-d371-4870-a272-f4f23a1fd32e" />
+
+The Adaptive method on the Convolutional Layer causes higher-level features to be encoded on the initial layer. The Adaptive activation allows for greater learning capacity in the initial layer with the additional parameter to be optimized equivalently used in the shaping of features and hence the classification of images. 
+
 
